@@ -1,31 +1,53 @@
 'use strict';
-module.exports = (fn, wait, opts) => {
+
+module.exports = function (fn, wait, opts) {
 	if (!Number.isFinite(wait)) {
 		throw new TypeError('Expected `wait` to be a finite number');
 	}
 
 	opts = opts || {};
 
-	let leadingVal;
-	let timer;
-	let resolveList = [];
+	var leadingVal = void 0;
+	var timer = void 0;
+	var resolveList = [];
 
 	return function () {
-		const ctx = this;
-		const args = arguments;
+		var ctx = this;
+		var args = arguments;
 
-		return new Promise(resolve => {
-			const runImmediately = opts.leading && !timer;
+		return new Promise(function (resolve) {
+			var runImmediately = opts.leading && !timer;
 
 			clearTimeout(timer);
 
-			timer = setTimeout(() => {
+			timer = setTimeout(function () {
 				timer = null;
 
-				const res = opts.leading ? leadingVal : fn.apply(ctx, args);
+				var res = opts.leading ? leadingVal : fn.apply(ctx, args);
 
-				for (resolve of resolveList) {
-					resolve(res);
+				var _iteratorNormalCompletion = true;
+				var _didIteratorError = false;
+				var _iteratorError = undefined;
+
+				try {
+					for (var _iterator = resolveList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+						resolve = _step.value;
+
+						resolve(res);
+					}
+				} catch (err) {
+					_didIteratorError = true;
+					_iteratorError = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion && _iterator.return) {
+							_iterator.return();
+						}
+					} finally {
+						if (_didIteratorError) {
+							throw _iteratorError;
+						}
+					}
 				}
 
 				resolveList = [];

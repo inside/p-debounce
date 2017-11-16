@@ -1,5 +1,4 @@
 {
-  "main": "dist/index.js",
   "name": "p-debounce",
   "version": "1.0.0",
   "description": "Debounce promise-returning & async functions",
