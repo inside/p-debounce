@@ -1,5 +1,5 @@
 {
-  "main": "dist/index.js",
+  "main": "qweryuiop/index.js",
   "name": "p-debounce",
   "version": "1.0.0",
   "description": "Debounce promise-returning & async functions",
@@ -14,7 +14,7 @@
     "node": ">=4"
   },
   "scripts": {
-    "build": "babel index.js --presets babel-preset-es2015 --out-dir dist",
+    "build": "babel index.js --presets babel-preset-es2015 --out-dir qweryuiop",
     "prepublish": "npm run build",
     "test": "xo && ava"
   },
